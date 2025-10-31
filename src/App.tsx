@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Quote from "./pages/Quote";
 import NotFound from "./pages/NotFound";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/cotacao" element={<Quote />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/politica-privacidade" element={<PrivacyPolicy />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

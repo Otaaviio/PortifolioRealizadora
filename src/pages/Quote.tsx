@@ -14,26 +14,44 @@ export default function Quote() {
     name: "",
     email: "",
     phone: "",
-    message: ""
+    message: "",
+    acceptedPrivacy: false,
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!formData.acceptedPrivacy) {
+      toast({
+        title: "Atenção",
+        description: "Você precisa aceitar a Política de Privacidade.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     toast({
       title: "Cotação enviada!",
       description: "Entraremos em contato em breve.",
     });
-    setFormData({ name: "", email: "", phone: "", message: "" });
+
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+      acceptedPrivacy: false,
+    });
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      
+
       <main className="flex-1 pt-16">
         <div className="flex flex-col lg:flex-row min-h-[calc(100vh-4rem)]">
           {/* Imagem - 2/3 da página */}
-          <div 
+          <div
             className="lg:w-2/3 min-h-[40vh] lg:min-h-full bg-cover bg-center"
             style={{ backgroundImage: `url(${quoteImage})` }}
           >
@@ -61,7 +79,9 @@ export default function Quote() {
                   <Input
                     id="name"
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
                     required
                   />
                 </div>
@@ -72,7 +92,9 @@ export default function Quote() {
                     id="email"
                     type="email"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
                     required
                   />
                 </div>
@@ -83,7 +105,9 @@ export default function Quote() {
                     id="phone"
                     type="tel"
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: e.target.value })
+                    }
                     required
                   />
                 </div>
@@ -93,9 +117,39 @@ export default function Quote() {
                   <Textarea
                     id="message"
                     value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, message: e.target.value })
+                    }
                     rows={4}
                   />
+                </div>
+
+                <div className="flex items-start gap-2">
+                  <input
+                    type="checkbox"
+                    id="privacy"
+                    checked={formData.acceptedPrivacy}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        acceptedPrivacy: e.target.checked,
+                      })
+                    }
+                    required
+                    className="mt-1 w-4 h-4 text-primary"
+                  />
+                  <Label htmlFor="privacy" className="text-sm cursor-pointer">
+                    Li e aceito a{" "}
+                    <a
+                      href="/politica-privacidade"
+                      target="_blank"
+                      className="text-primary underline hover:text-primary/80"
+                    >
+                      Política de Privacidade
+                    </a>{" "}
+                    e autorizo o uso dos meus dados para contato sobre planos de
+                    saúde.
+                  </Label>
                 </div>
 
                 <Button type="submit" className="w-full" size="lg">
