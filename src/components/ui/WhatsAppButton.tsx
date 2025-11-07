@@ -2,9 +2,8 @@ import { MessageCircle } from "lucide-react";
 
 export const WhatsAppButton = () => {
   const handleClick = () => {
-    // SUBSTITUIR pelo número real no formato: 5511987654321
     window.open(
-      "https://wa.me/5511987654321?text=Olá! Gostaria de saber mais sobre os planos de saúde.",
+      "https://wa.me/5511947451553?text=Olá! Gostaria de saber mais sobre os planos de saúde.",
       "_blank"
     );
   };

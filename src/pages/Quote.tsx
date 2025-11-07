@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import quoteImage from "@/assets/services-image.jpg";
+import quoteImage from "@/assets/img/services-image.jpg";
 
 export default function Quote() {
   const { toast } = useToast();

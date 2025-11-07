@@ -3,11 +3,6 @@ import {
   Users,
   Briefcase,
   Baby,
-  Plus,
-  Heart,
-  Cross,
-  Activity,
-  Stethoscope,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
@@ -16,25 +11,23 @@ import { Button } from "@/components/ui/button";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useEffect, useRef, useState } from "react";
 
-const Unimed =
-  "https://play-lh.googleusercontent.com/HdrQkswgIYqEZS8uy1tjAW9qBcO_VU2TANDPAbmsEv1OY2tOzSp5BUVQbv0x1Ja822I";
-const Bradesco =
-  "https://play-lh.googleusercontent.com/2wsc32c8VE45NSLt9hgnNhNVzNLgh7DL3vBjYo6J6j2BpknwL_8FduJNQuCz1fy4UA";
-const Amil =
-  "https://mir-s3-cdn-cf.behance.net/projects/404/5e81b778721859.Y3JvcCw4OTQsNzAwLDI1Miww.jpg";
-const SulAmerica =
-  "https://referenciaseguros.com.br/wp-content/uploads/2024/07/V2-ReferenciaSeguros_Arquivo_MegaMenu_Operadoras_SulAmerica.png";
-const NotreDame =
-  "https://images.seeklogo.com/logo-png/28/2/grupo-notredame-intermedica-logo-png_seeklogo-282003.png";
-const Hapvida =
-  "https://i.ytimg.com/vi/jXq7wjlhiyM/maxresdefault.jpg";
+import Unimed from "../assets/img/UnimedLogo.png";
+import Bradesco from "../assets/img/BradescoLogo.png";
+import Amil from "../assets/img/AmilLogo.png";
+import SulAmerica from "../assets/img/SulamericaLogo.png";
+import NotreDame from "../assets/img/NotreDameLogo.png";
+import Hapvida from "../assets/img/HapvidaLogo.png";
 
 const partners = [
   { name: "Unimed", icon: Unimed, color: "text-green-600" },
   { name: "Bradesco Saúde", icon: Bradesco, color: "text-red-600" },
   { name: "Amil", icon: Amil, color: "text-blue-600" },
   { name: "SulAmérica", icon: SulAmerica, color: "text-orange-600" },
-  { name: "NotreDame Intermédica", icon: NotreDame, color: "text-purple-600" },
+  {
+    name: "NotreDame Intermédica",
+    icon: NotreDame,
+    color: "text-purple-600",
+  },
   { name: "Hapvida", icon: Hapvida, color: "text-emerald-600" },
 ];
 
