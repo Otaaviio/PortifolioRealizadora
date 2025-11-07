@@ -1,16 +1,41 @@
-import { Shield, Users, Briefcase, Baby, Plus, Heart, Cross, Activity, Stethoscope, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Shield,
+  Users,
+  Briefcase,
+  Baby,
+  Plus,
+  Heart,
+  Cross,
+  Activity,
+  Stethoscope,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useEffect, useRef, useState } from "react";
 
+const Unimed =
+  "https://play-lh.googleusercontent.com/HdrQkswgIYqEZS8uy1tjAW9qBcO_VU2TANDPAbmsEv1OY2tOzSp5BUVQbv0x1Ja822I";
+const Bradesco =
+  "https://play-lh.googleusercontent.com/2wsc32c8VE45NSLt9hgnNhNVzNLgh7DL3vBjYo6J6j2BpknwL_8FduJNQuCz1fy4UA";
+const Amil =
+  "https://mir-s3-cdn-cf.behance.net/projects/404/5e81b778721859.Y3JvcCw4OTQsNzAwLDI1Miww.jpg";
+const SulAmerica =
+  "https://referenciaseguros.com.br/wp-content/uploads/2024/07/V2-ReferenciaSeguros_Arquivo_MegaMenu_Operadoras_SulAmerica.png";
+const NotreDame =
+  "https://images.seeklogo.com/logo-png/28/2/grupo-notredame-intermedica-logo-png_seeklogo-282003.png";
+const Hapvida =
+  "https://i.ytimg.com/vi/jXq7wjlhiyM/maxresdefault.jpg";
+
 const partners = [
-  { name: "Unimed", icon: Plus, color: "text-green-600" },
-  { name: "Bradesco Saúde", icon: Shield, color: "text-red-600" },
-  { name: "Amil", icon: Heart, color: "text-blue-600" },
-  { name: "SulAmérica", icon: Activity, color: "text-orange-600" },
-  { name: "NotreDame Intermédica", icon: Cross, color: "text-purple-600" },
-  { name: "Hapvida", icon: Stethoscope, color: "text-emerald-600" },
+  { name: "Unimed", icon: Unimed, color: "text-green-600" },
+  { name: "Bradesco Saúde", icon: Bradesco, color: "text-red-600" },
+  { name: "Amil", icon: Amil, color: "text-blue-600" },
+  { name: "SulAmérica", icon: SulAmerica, color: "text-orange-600" },
+  { name: "NotreDame Intermédica", icon: NotreDame, color: "text-purple-600" },
+  { name: "Hapvida", icon: Hapvida, color: "text-emerald-600" },
 ];
 
 const PartnersScroll = () => {
@@ -23,24 +48,25 @@ const PartnersScroll = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (!scrollRef.current) return;
-      
+
       const element = scrollRef.current;
       const rect = element.getBoundingClientRect();
       const elementTop = rect.top;
       const elementHeight = rect.height;
       const windowHeight = window.innerHeight;
-      
+
       if (elementTop < windowHeight && elementTop + elementHeight > 0) {
-        const scrolled = (windowHeight - elementTop) / (windowHeight + elementHeight);
+        const scrolled =
+          (windowHeight - elementTop) / (windowHeight + elementHeight);
         const progress = Math.max(0, Math.min(1, scrolled));
         setScrollProgress(progress);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     handleScroll();
-    
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const updateScrollButtons = () => {
@@ -50,12 +76,12 @@ const PartnersScroll = () => {
     setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
   };
 
-  const scroll = (direction: 'left' | 'right') => {
+  const scroll = (direction: "left" | "right") => {
     if (!containerRef.current) return;
     const scrollAmount = 300;
     containerRef.current.scrollBy({
-      left: direction === 'left' ? -scrollAmount : scrollAmount,
-      behavior: 'smooth'
+      left: direction === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth",
     });
     setTimeout(updateScrollButtons, 300);
   };
@@ -64,8 +90,8 @@ const PartnersScroll = () => {
     updateScrollButtons();
     const container = containerRef.current;
     if (container) {
-      container.addEventListener('scroll', updateScrollButtons);
-      return () => container.removeEventListener('scroll', updateScrollButtons);
+      container.addEventListener("scroll", updateScrollButtons);
+      return () => container.removeEventListener("scroll", updateScrollButtons);
     }
   }, []);
 
@@ -78,7 +104,7 @@ const PartnersScroll = () => {
         variant="outline"
         size="icon"
         className="absolute left-2 top-1/2 -translate-y-1/2 z-10 md:hidden bg-background/80 backdrop-blur-sm"
-        onClick={() => scroll('left')}
+        onClick={() => scroll("left")}
         disabled={!canScrollLeft}
       >
         <ChevronLeft className="h-4 w-4" />
@@ -87,7 +113,7 @@ const PartnersScroll = () => {
         variant="outline"
         size="icon"
         className="absolute right-2 top-1/2 -translate-y-1/2 z-10 md:hidden bg-background/80 backdrop-blur-sm"
-        onClick={() => scroll('right')}
+        onClick={() => scroll("right")}
         disabled={!canScrollRight}
       >
         <ChevronRight className="h-4 w-4" />
@@ -95,9 +121,9 @@ const PartnersScroll = () => {
 
       {/* Desktop: scroll com movimento da página */}
       <div className="hidden md:block overflow-hidden">
-        <div 
+        <div
           className="flex gap-6 transition-transform duration-300 ease-out"
-          style={{ 
+          style={{
             transform: `translateX(-${scrollProgress * 50}%)`,
           }}
         >
@@ -108,8 +134,14 @@ const PartnersScroll = () => {
                 key={index}
                 className="flex-shrink-0 w-48 flex flex-col items-center justify-center p-6 glass-card rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-300"
               >
-                <div className={`text-5xl mb-3 ${partner.color} transition-transform duration-300 hover:scale-110`}>
-                  <Icon className="w-12 h-12" strokeWidth={1.5} />
+                <div
+                  className={`text-5xl mb-3 ${partner.color} transition-transform duration-300 hover:scale-110`}
+                >
+                  <img
+                    src={partner.icon}
+                    alt={partner.name}
+                    className="w-12 h-12"
+                  />
                 </div>
                 <p className="text-sm font-bold text-card-foreground text-center">
                   {partner.name}
@@ -121,10 +153,10 @@ const PartnersScroll = () => {
       </div>
 
       {/* Mobile: scroll manual com setas */}
-      <div 
+      <div
         ref={containerRef}
         className="md:hidden overflow-x-auto scrollbar-hide px-4"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         <div className="flex gap-6">
           {duplicatedPartners.map((partner, index) => {
@@ -134,8 +166,14 @@ const PartnersScroll = () => {
                 key={index}
                 className="flex-shrink-0 w-48 flex flex-col items-center justify-center p-6 glass-card rounded-xl hover:shadow-xl hover:scale-105 transition-all duration-300"
               >
-                <div className={`text-5xl mb-3 ${partner.color} transition-transform duration-300 hover:scale-110`}>
-                  <Icon className="w-12 h-12" strokeWidth={1.5} />
+                <div
+                  className={`text-5xl mb-3 ${partner.color} transition-transform duration-300 hover:scale-110`}
+                >
+                  <img
+                    src={partner.icon}
+                    alt={partner.name}
+                    className="w-12 h-12"
+                  />
                 </div>
                 <p className="text-sm font-bold text-card-foreground text-center">
                   {partner.name}
@@ -153,39 +191,56 @@ const plans = [
   {
     icon: Shield,
     title: "Plano Individual",
-    description: "Cobertura completa personalizada para suas necessidades de saúde.",
-    features: ["Rede credenciada ampla", "Atendimento nacional", "Telemedicina incluída"]
+    description:
+      "Cobertura completa personalizada para suas necessidades de saúde.",
+    features: [
+      "Rede credenciada ampla",
+      "Atendimento nacional",
+      "Telemedicina incluída",
+    ],
   },
   {
     icon: Users,
     title: "Plano Familiar",
     description: "Proteção para toda a família com condições especiais.",
-    features: ["Até 8 beneficiários", "Cobertura pediátrica", "Desconto progressivo"]
+    features: [
+      "Até 8 beneficiários",
+      "Cobertura pediátrica",
+      "Desconto progressivo",
+    ],
   },
   {
     icon: Briefcase,
     title: "Plano Empresarial",
-    description: "Soluções corporativas para cuidar da saúde dos seus colaboradores.",
-    features: ["A partir de 2 vidas", "Gestão simplificada", "Preços competitivos"]
+    description:
+      "Soluções corporativas para cuidar da saúde dos seus colaboradores.",
+    features: [
+      "A partir de 2 vidas",
+      "Gestão simplificada",
+      "Preços competitivos",
+    ],
   },
   {
     icon: Baby,
     title: "Plano Sênior",
     description: "Cuidado especializado para a terceira idade.",
-    features: ["Sem carência", "Rede gerontológica", "Atendimento domiciliar"]
-  }
+    features: ["Sem carência", "Rede gerontológica", "Atendimento domiciliar"],
+  },
 ];
 
 export const Services = () => {
   const { elementRef, isVisible } = useScrollAnimation();
-  
+
   const scrollToContact = () => {
     const element = document.getElementById("contato");
     element?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section id="servicos" className="py-32 bg-gradient-to-b from-muted/30 to-background">
+    <section
+      id="servicos"
+      className="py-32 bg-gradient-to-b from-muted/30 to-background"
+    >
       <div className="container mx-auto px-4">
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-6 animate-fade-in">
@@ -196,14 +251,14 @@ export const Services = () => {
           </p>
         </div>
 
-        <div 
+        <div
           ref={elementRef}
           className={`grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
           {plans.map((plan, index) => (
-            <Card 
+            <Card
               key={index}
               className="p-6 glass-card hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:scale-105"
               style={{ transitionDelay: `${index * 100}ms` }}
@@ -214,18 +269,19 @@ export const Services = () => {
               <h3 className="text-2xl font-bold text-card-foreground mb-2">
                 {plan.title}
               </h3>
-              <p className="text-muted-foreground mb-4">
-                {plan.description}
-              </p>
+              <p className="text-muted-foreground mb-4">{plan.description}</p>
               <ul className="space-y-2 mb-6">
                 {plan.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start text-sm text-muted-foreground">
+                  <li
+                    key={idx}
+                    className="flex items-start text-sm text-muted-foreground"
+                  >
                     <span className="text-secondary mr-2">✓</span>
                     {feature}
                   </li>
                 ))}
               </ul>
-              <Button 
+              <Button
                 className="w-full"
                 variant="outline"
                 onClick={scrollToContact}
@@ -242,7 +298,9 @@ export const Services = () => {
               Operadoras Parceiras
             </h3>
             <p className="text-muted-foreground mb-8 text-center max-w-2xl mx-auto">
-              Trabalhamos com as principais operadoras de saúde do Brasil, garantindo que você tenha acesso à melhor rede credenciada e aos serviços mais completos do mercado.
+              Trabalhamos com as principais operadoras de saúde do Brasil,
+              garantindo que você tenha acesso à melhor rede credenciada e aos
+              serviços mais completos do mercado.
             </p>
             <PartnersScroll />
             <div className="text-center mt-8">

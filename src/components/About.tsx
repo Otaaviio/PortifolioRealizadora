@@ -11,7 +11,7 @@ const features = [
   {
     icon: Award,
     title: "Experiência Comprovada",
-    description: "Anos de experiência no mercado de saúde, com centenas de famílias atendidas."
+    description: "Mais de 10 anos de experiência no mercado de saúde, com centenas de famílias atendidas."
   },
   {
     icon: Users,
